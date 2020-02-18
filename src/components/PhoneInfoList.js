@@ -3,12 +3,19 @@ import PhoneInfo from './PhoneInfo';
 
 class PhoneInfoList extends Component {
     static defaultProps = {
-        data: []
+        data: [],
+        list: [],
+        onRemove: () => console.warn('onRemove not defined')
     }
     render() {
-        const { data } = this.props;
+        const { data, onRemove } = this.props;
         const list = data.map(
-            dataReal => (<PhoneInfo key={dataReal.id} info={dataReal}/>)
+            info => (
+                <PhoneInfo
+                    key={info.id}
+                    info={info}
+                    onRemove={onRemove}
+                />)
         );
         return (
             <div>
@@ -29,5 +36,6 @@ props info 값을 dataReal로 넘겼다. (배열렌더링)
 렌더링을 할 때 꼭 필요한 값입니다. 
 6.
 PhoneInfo컴포넌트의 값이 바뀌게 된 상태에서 {list}를 리턴함으로써 박스가 추가된다.
-
+(3)
+삭제 된 데이터 list에 전달 후 list 리턴 됨
 */

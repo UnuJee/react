@@ -24,13 +24,23 @@ class App extends Component {
           information: information.concat({ id: this.id++, ...data })
         })
     }
+    handleRemove = (id) => {
+        const { information } = this.state;
+        this.setState({
+            information: information.filter(info => info.id !== id)
+        })
+    }
     render() {
-       return (
+        const { information } = this.state;
+        return (
            <div>
                 <PhoneForm
                     onCreate={this.handleCreate}
                 />
-                <PhoneInfoList data={this.state.information} />
+                <PhoneInfoList
+                    data={this.state.information}
+                    onRemove={this.handleRemove}
+                />
            </div>
        );
     }
@@ -48,4 +58,12 @@ information 배열에 위의 state 상태를 받아온다.
 information의 state를 바꾸는데 그 state의 id는 1더하고 나머지 data 값이 들어간 값이다.
 ex) id:3 name:777 phone:888
 PhoneInfoList의 data props 값에 현재 information state 값을 넣어준다.
+
+(2) PhoneInfo > PhoneInfoList > App onRemove가 넘어오고 handleRemove 동작
+information 배열을 state로 불러옴
+information의 state를 변경하는데, filter 내장함수를 통해 배열 수정에 들어감
+원래의 배열 info에서, 원래의 배열 info들 중 불러온 값의 id를 가지는 데이터와 불러온 값을 비교
+그 데이터를 삭제
+information 배열에 변화가 생김
+data가 PhoneInfoList로 넘어감
 */
