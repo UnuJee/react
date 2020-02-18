@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PhoneForm from './components/PhoneForm';
+import PhoneInfoList from './components/PhoneInfoList';
 
 class App extends Component {
     id = 2
@@ -24,13 +25,12 @@ class App extends Component {
         })
     }
     render() {
-      const { information } = this.state;
        return (
            <div>
-               <PhoneForm
-                onCreate={this.handleCreate}
-              />
-              {JSON.stringify(information)}
+                <PhoneForm
+                    onCreate={this.handleCreate}
+                />
+                <PhoneInfoList data={this.state.information} />
            </div>
        );
     }
