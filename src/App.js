@@ -37,3 +37,15 @@ class App extends Component {
 }
 
 export default App;
+
+/* 1.
+information 배열이 두 개 이미 있다. 민준이 길동이. 변화 없다.
+아직 handleCreate 동작 X.
+폰 폼에 onCreate 함수를 넘겨준다.
+3.
+PhoneForm의 이벤트로 handleCreate의 data 값이 ex) name:777 phone:888 인 상태
+information 배열에 위의 state 상태를 받아온다.
+information의 state를 바꾸는데 그 state의 id는 1더하고 나머지 data 값이 들어간 값이다.
+ex) id:3 name:777 phone:888
+PhoneInfoList의 data props 값에 현재 information state 값을 넣어준다.
+*/
