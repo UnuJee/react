@@ -10,6 +10,7 @@ class PhoneForm extends Component {
       [e.target.name]: e.target.value
     })
   }
+
   handleSubmit = (e) => {
     // 페이지 리로딩 방지
     e.preventDefault();
