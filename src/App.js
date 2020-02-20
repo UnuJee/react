@@ -16,7 +16,13 @@ class App extends Component {
                 name: '홍길동',
                 phone: '010-0000-0001'
             }
-        ]
+        ],
+        keyword: ''
+    }
+    handleChange = (e) => {
+        this.setState({
+            keyword: e.target.value
+        });
     }
     handleCreate = (data) => {
         const { information } = this.state;
@@ -41,14 +47,30 @@ class App extends Component {
         });
     }
     render() {
-        const { information } = this.state;
+        const { information, keyword } = this.state;
+        const filteredList = information.filter(
+            info => info.name.indexOf(keyword) !== -1
+        );
+        // 기존 information 배열을 불러왔다.
+        // 그 information 배열에서 필터링를 할 것이다.
+        // information 배열에서 name의 문자열 내에 keyword 문자열의 index 값을 리턴한다.
+        // index 값이 -1인 것들을 필터링한다.
+        // (지라는 keyword 문자열의 index 값들이 모두 -1이기 때문에 모든 배열들이 필터링된다.)
         return (
            <div>
                 <PhoneForm
                     onCreate={this.handleCreate}
                 />
+                <p>
+                    <input
+                        placeholder="검색 할 이름을 입력하세요."
+                        onChange={this.handleChange}
+                        value={keyword}
+                    />
+                </p>
+                <hr />
                 <PhoneInfoList
-                    data={this.state.information}
+                    data={filteredList}
                     onRemove={this.handleRemove}
                     onUpdate={this.handleUpdate}
                 />

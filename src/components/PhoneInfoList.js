@@ -4,11 +4,25 @@ import PhoneInfo from './PhoneInfo';
 class PhoneInfoList extends Component {
     static defaultProps = {
         data: [],
-        list: [],
         onRemove: () => console.warn('onRemove not defined'),
         onUpdate: () => console.warn('onUpadte not defined')
     }
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.data !== this.props.data;
+    }
+    // true => 렌더
+    // false => 렌더 X
+    // 다음 데이터와 지금 데이터가 같다면 렌더X, 다르면 렌더
+    // 불변성. 배열 자체를 수정하지 않고, 기존 배열에 기반하여 새 배열을 만들어내는
+    // concat, slice, map, filter 같은 함수를 사용했기 때문에
+    // 불변성이 유지 되었고 비교가 가능하게 되었다.
+    // 비교가 가능하게 되었기 때문에 shouldComponentUpdate api를 사용할 수 있게 되었고
+    // 리액트에서 필요한 상황에 리렌더링 되도록 설계 할 수 있었다.
+
+    // PhoneInfoList는 다음 데이타와 지금 데이타가 다를 때 렌더되어야 한다.
+    // 
     render() {
+        console.log('render PhoneInfoList');
         const { data, onRemove, onUpdate } = this.props;
         const list = data.map(
             info => (
